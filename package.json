@@ -1,0 +1,53 @@
+{
+  "name": "@abstracter/eslint-config",
+  "version": "0.0.0",
+  "private": false,
+  "description": "common eslint configuration for common env/stacks",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "release": "node scripts/release.js",
+    "lint": "eslint --format pretty --ext=.js,.ts --fix ."
+  },
+  "engines": {
+    "node": ">= v14.18.2"
+  },
+  "keywords": [
+    "eslint",
+    "eslintconfig"
+  ],
+  "files": [
+    "eslint"
+  ],
+  "author": "Elad Chen",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abstracter-io/eslint-config"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "peerDependencies": {
+    "@typescript-eslint/parser": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^16.0.0",
+    "eslint-formatter-pretty": "^4.0.0",
+    "eslint-plugin-import": "^2.0.0",
+    "eslint-plugin-jest": "^25.0.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.0.0"
+  },
+  "devDependencies": {
+    "@abstracter/atomic-release": "^1.2.0",
+    "eslint": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-formatter-pretty": "^4.1.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0"
+  }
+}
