@@ -15,9 +15,6 @@
     "eslint",
     "eslintconfig"
   ],
-  "files": [
-    "eslint"
-  ],
   "author": "Elad Chen",
   "license": "MIT",
   "repository": {
