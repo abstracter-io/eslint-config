@@ -94,6 +94,22 @@ The config uses [eslint-plugin-react-hooks](https://github.com/facebook/react/tr
 Make sure to install:
 > npm install --save-dev eslint-plugin-react-hooks
 
+#### Jest
+A config for code which uses Jest.
+
+eslint config example:
+
+```json
+{
+  "extends": ["@abstracter/eslint-config/jest"]
+}
+```
+
+This config uses [eslint-plugin-jest](https://github.com/jest-community/eslint-plugin-jest) recommended config.
+
+Make sure to install:
+> npm install --save-dev eslint-plugin-jest
+
 ## Mix & Match configs
 
 Use more than a single config to achieve a multipurpose config.  
