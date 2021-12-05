@@ -25,10 +25,6 @@ This config requires:
 - [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import)
 - [eslint-plugin-promise](https://github.com/xjamundx/eslint-plugin-promise)
 
-
-**NOTE**:  
-This config uses .  
-
 #### TypeScript
 A config for code written in TypeScript.
 
