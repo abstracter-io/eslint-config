@@ -24,8 +24,8 @@ const config = {
   },
 
   rules: {
-    // Spacing
-    // =======
+    // Code Style
+    // ==========
     "indent": ["error", 2],
 
     "linebreak-style": [process.platform === "win32" ? "off" : "error", "unix"],
@@ -49,13 +49,11 @@ const config = {
 
     "comma-spacing": ["error", { before: false, after: true }],
 
-    // Formatting
-    // ==========
     "semi": ["error", "always"],
 
     "no-tabs": ["error", { allowIndentationTabs: true }],
 
-    "max-len": ["error", { code: 120 }],
+    "max-len": ["error", { code: 120, ignoreUrls: true }],
 
     "quotes": ["error", "double", { avoidEscape: true }],
 

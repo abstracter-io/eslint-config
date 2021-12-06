@@ -54,7 +54,7 @@ eslint config example:
 }
 ```
 
-#### Node.JS
+#### Node.js
 A config for code expected to run in a node environment.
 
 eslint config example:
@@ -106,6 +106,21 @@ eslint config example:
 ```
 
 This config uses [eslint-plugin-jest](https://github.com/jest-community/eslint-plugin-jest) recommended config.
+
+#### TypeScript Node.js
+A config for code which uses TypeScript & Node.js
+
+> This config turns off redundant eslint-plugin-node rules when using typescript.
+
+eslint config example:
+
+```json
+{
+  "extends": ["@abstracter/eslint-config/typescript-node"]
+}
+```
+
+This config requires the same dependencies as [TypeScript](#typescript) and [Node.js](#nodejs).
 
 Make sure to install:
 > npm install --save-dev eslint-plugin-jest
