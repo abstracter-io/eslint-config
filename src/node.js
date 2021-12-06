@@ -3,14 +3,29 @@ const config = {
     node: true,
   },
 
-  plugins: [
-    "eslint-plugin-node",
-  ],
-
   extends: [
     "@abstracter/eslint-config/javascript",
 
     "plugin:node/recommended",
+  ],
+
+  plugins: [
+    "eslint-plugin-node",
+  ],
+
+  rules: {
+    // Enabled via overrides
+    "node/no-unpublished-require": "off",
+  },
+
+  overrides: [
+    {
+      files: "src/**",
+
+      rules: {
+        "node/no-unpublished-require": "error",
+      },
+    },
   ],
 };
 
