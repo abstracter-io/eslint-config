@@ -87,7 +87,7 @@ const config = {
 
     "grouped-accessor-pairs": ["error", "getBeforeSet"],
 
-    "max-statements-per-line": ["error", { max: 2 }],
+    "max-statements-per-line": ["error", { max: 1 }],
 
     "prefer-numeric-literals": ["error"],
 
