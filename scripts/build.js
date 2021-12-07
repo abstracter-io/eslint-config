@@ -4,14 +4,17 @@ const { DIST_ROOT_PATH, PROJECT_ROOT_PATH } = require("./constants");
 
 const clean = () => {
   return fs.rm(DIST_ROOT_PATH, { recursive: true, force: true }).then(() => {
-    console.log(`Deleted ${DIST_ROOT_PATH}`);
+    return console.log(`Deleted ${DIST_ROOT_PATH}`);
   });
 };
 
 const copySrc = () => {
   const copy = (src, dest) => {
-    return fs.mkdir(dest, { recursive: true }).then(() => {
-      return fs.readdir(src, { withFileTypes: true }).then((entries) => {
+    return fs.mkdir(dest, { recursive: true })
+      .then(() => {
+        return fs.readdir(src, { withFileTypes: true });
+      })
+      .then((entries) => {
         const promises = [];
 
         for (const entry of entries) {
@@ -29,7 +32,6 @@ const copySrc = () => {
 
         return Promise.all(promises);
       });
-    });
   };
 
   return copy(`${PROJECT_ROOT_PATH}/src`, `${DIST_ROOT_PATH}`);
@@ -48,8 +50,14 @@ const writeNpmConfig = () => {
   const content = "//registry.npmjs.org/:_authToken=${NPM_TOKEN}";
 
   return fs.writeFile(path, content).then(() => {
-    console.log(`Wrote ${path}`);
+    return console.log(`Wrote ${path}`);
   });
 };
 
-clean().then(copySrc).then(copyFiles).then(writeNpmConfig);
+clean()
+  .then(copySrc)
+  .then(copyFiles)
+  .then(writeNpmConfig)
+  .catch((e) => {
+    return console.error(e);
+  });
