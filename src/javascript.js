@@ -3,16 +3,20 @@ const config = {
     es6: true,
   },
 
+  plugins: [
+    // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-default-export.md
+    "eslint-plugin-import",
+
+    "eslint-plugin-promise",
+  ],
+
   extends: [
     "eslint:recommended",
 
     // https://github.com/standard/eslint-config-standard
     "eslint-config-standard",
-  ],
 
-  plugins: [
-    // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-default-export.md
-    "eslint-plugin-import",
+    "plugin:promise/recommended",
   ],
 
   parserOptions: {

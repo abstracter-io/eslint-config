@@ -71,4 +71,6 @@ const runStrategy = (release) => {
   return strategy.run();
 };
 
-createRelease().then(runStrategy);
+createRelease().then(runStrategy).catch((e) => {
+  console.error(e);
+});
