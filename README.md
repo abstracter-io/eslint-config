@@ -19,7 +19,7 @@ eslint config example:
 }
 ```
 
-This config requires:
+This config depends on:
 - [eslint-config-standard](https://github.com/standard/eslint-config-standard)
 - [eslint-plugin-node](https://github.com/mysticatea/eslint-plugin-node)
 - [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import)
