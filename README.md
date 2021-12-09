@@ -40,7 +40,7 @@ This config requires:
 - [@typescript-eslint/parser](https://github.com/typescript-eslint/typescript-eslint)
 - [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin)
 
-Make sure to install it:
+Make sure to install:
 > npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin
 
 #### Browser
