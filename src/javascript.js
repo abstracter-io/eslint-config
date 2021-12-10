@@ -30,7 +30,7 @@ const config = {
   rules: {
     // Code Style
     // ==========
-    "indent": ["error", 2],
+    "indent": ["error", 2, { SwitchCase: 1 }],
 
     "linebreak-style": [process.platform === "win32" ? "off" : "error", "unix"],
 
