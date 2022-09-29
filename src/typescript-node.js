@@ -1,6 +1,7 @@
 const config = {
   extends: [
     "@abstracter/eslint-config/node",
+    "@abstracter/eslint-config/javascript",
     "@abstracter/eslint-config/typescript",
   ],
 

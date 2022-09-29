@@ -4,8 +4,6 @@ const config = {
   ],
 
   extends: [
-    "@abstracter/eslint-config/javascript",
-
     "plugin:jest/recommended",
   ],
 

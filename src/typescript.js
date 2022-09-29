@@ -8,8 +8,6 @@ const config = {
   ],
 
   extends: [
-    "@abstracter/eslint-config/javascript",
-
     "plugin:@typescript-eslint/recommended",
   ],
 

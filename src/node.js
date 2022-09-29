@@ -4,28 +4,11 @@ const config = {
   },
 
   extends: [
-    "@abstracter/eslint-config/javascript",
-
-    "plugin:node/recommended",
+    "plugin:n/recommended",
   ],
 
   plugins: [
-    "eslint-plugin-node",
-  ],
-
-  rules: {
-    // Enabled via overrides
-    "node/no-unpublished-require": "off",
-  },
-
-  overrides: [
-    {
-      files: "src/**",
-
-      rules: {
-        "node/no-unpublished-require": "error",
-      },
-    },
+    "eslint-plugin-n",
   ],
 };
 

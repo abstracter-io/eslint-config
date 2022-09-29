@@ -4,10 +4,18 @@ const config = {
   ],
 
   extends: [
-    "@abstracter/eslint-config/jsx",
-
     "plugin:react-hooks/recommended",
   ],
+
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+
+  rules: {
+    "jsx-quotes": ["error", "prefer-double"],
+  },
 };
 
 module.exports = config;
