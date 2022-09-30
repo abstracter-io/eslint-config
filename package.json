@@ -4,6 +4,7 @@
   "private": false,
   "description": "common eslint configuration for common env/stacks",
   "scripts": {
+    "commit": "git-cz",
     "build": "node scripts/build.js",
     "release": "node scripts/release.js",
     "lint": "eslint --format pretty --ext=.js,.ts --fix ."
@@ -28,7 +29,8 @@
   "devDependencies": {
     "@abstracter/atomic-release": "^1.2.0",
     "eslint": "^8.24.0",
-    "eslint-formatter-pretty": "^4.1.0"
+    "eslint-formatter-pretty": "^4.1.0",
+    "git-cz": "^4.9.0"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.38.1",

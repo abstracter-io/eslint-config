@@ -2,7 +2,7 @@
 # https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables#default-environment-variables
 # https://discuss.circleci.com/t/conditional-expression-documentation/31227
 
-name: Continous Integration/Deployment
+name: Continuous Integration/Deployment
 
 on:
   push:
@@ -20,7 +20,6 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      npm_config_cache: $HOME/.npm
       npm_cache_key: node-modules-cache
 
     steps:
@@ -29,24 +28,29 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Determine Node.js version to use
+      - name: Get node version
         run: echo "::set-output name=version::$(cat .nvmrc)"
         id: nvm
 
-      - name: Setup Node.js ${{ steps.nvm.outputs.version }}
+      - name: Setup node ${{ steps.nvm.outputs.version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ steps.nvm.outputs.version }}
 
-      - name: Cache node modules
-        id: cache-node-modules
-        uses: actions/cache@v2
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        run: echo "::set-output name=dir::$(npm config get cache)"
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        id: npm-cache
         with:
-          path: ${{ env.npm_config_cache }}
-          key: ${{ env.npm_cache_key }}-${{ hashFiles('package.json') }}
-          restore-keys: ${{ env.npm_cache_key }}-
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ steps.nvm.outputs.version }}-${{ hashFiles('package.json') }}
+          restore-keys: ${{ runner.os }}-node-${{ steps.nvm.outputs.version }}-
 
       - name: install
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm install
 
       - name: lint
