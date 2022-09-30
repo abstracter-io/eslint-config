@@ -1,8 +1,13 @@
-### 0.3.2-beta.0 (2022-09-30)
+## 1.0.0 (2022-09-30)
 
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 configs do not extends other shareable configs
 
 ### Bug Fixes
 
+* 🐛 configs should be standalone ([9afd799](https://github.com/abstracter-io/eslint-config/commit/9afd799bef7ae92a8abbd096074b6bbeb0c59383))
 * cleanup ([568ce5c](https://github.com/abstracter-io/eslint-config/commit/568ce5ccb5321c8d734605b5630ba8ad283b3209))
 
 
