@@ -4,7 +4,7 @@ Common eslint configuration for common env/stacks
 
 ## Install
 
-> npm install --save-dev eslint@^8 @abstracter/eslint-config
+> npm install --save-dev eslint @abstracter/eslint-config
 
 ## Example
 
