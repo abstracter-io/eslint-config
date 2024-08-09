@@ -2,12 +2,17 @@
   "name": "@abstracter/eslint-config",
   "version": "0.0.0",
   "private": false,
-  "description": "common eslint configuration for common env/stacks",
+  "description": "Common eslint configuration for common env/stacks",
+  "files": [
+    "lib/**"
+  ],
+  "main": "lib/index.js",
   "scripts": {
-    "commit": "git-cz",
-    "build": "node scripts/build.js",
-    "release": "node scripts/release.js",
-    "lint": "eslint --format pretty --ext=.js,.ts --fix ."
+    "outdated": "npx npm-check -u",
+    "lint": "eslint --format pretty --fix",
+    "lint:all": "npm run lint -- .",
+    "prepare": "husky",
+    "release": "node scripts/release.mjs"
   },
   "engines": {
     "node": ">=16.16.0"
@@ -20,28 +25,39 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abstracter-io/eslint-config"
+    "url": "git+https://github.com/abstracter-io/eslint-config.git"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
-    "@abstracter/atomic-release": "^1.2.0",
-    "eslint": "^8.24.0",
-    "eslint-formatter-pretty": "^4.1.0",
-    "git-cz": "^4.9.0"
+    "@abstracter/atomic-release": "^2.1.0",
+    "@commitlint/cli": "^19.4.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/cz-commitlint": "^19.4.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint-formatter-pretty": "^6.0.1",
+    "git-cz": "^4.9.0",
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.8",
+    "micromatch": "^4.0.7"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.38.1",
-    "@typescript-eslint/parser": "^5.38.1",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest": "^27.0.4",
-    "eslint-plugin-n": "^15.3.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.0.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "globals": "^13.17.0"
+    "@eslint/js": "^9.8.0",
+    "@stylistic/eslint-plugin": "^2.6.2",
+    "eslint-formatter-pretty": "^6.0.1",
+    "eslint-plugin-n": "^17.10.2",
+    "eslint-plugin-promise": "^7.1.0",
+    "typescript-eslint": "^8.0.1"
+  },
+  "peerDependencies": {
+    "eslint": "^9.8.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
