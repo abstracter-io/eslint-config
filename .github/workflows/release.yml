@@ -45,7 +45,7 @@ jobs:
         with:
           path: node_modules
           # include the branch name here...?
-          key: node-modules-${{ steps.setup-node.outputs.node-version }}-${{ hashFiles('package-lock.json') }}
+          key: node-modules-${{ steps.setup-node.outputs.node-version }}-${{ hashFiles('package') }}
 
       - name: Install node_modules
         if: steps.npm-cache.outputs.cache-hit != 'true'
