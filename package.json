@@ -32,7 +32,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
-    "@abstracter/atomic-release": "^2.1.0",
+    "@abstracter/atomic-release": "^2.1.1",
     "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/cz-commitlint": "^19.4.0",
