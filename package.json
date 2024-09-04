@@ -45,12 +45,15 @@
     "micromatch": "^4.0.7"
   },
   "dependencies": {
-    "@eslint/js": "^9.8.0",
-    "@stylistic/eslint-plugin": "^2.6.2",
+    "@eslint/js": "^9.9.1",
+    "@stylistic/eslint-plugin": "^2.7.2",
     "eslint-formatter-pretty": "^6.0.1",
     "eslint-plugin-n": "^17.10.2",
     "eslint-plugin-promise": "^7.1.0",
-    "typescript-eslint": "^8.0.1"
+    "eslint-plugin-react": "^7.35.2",
+    "eslint-plugin-react-hooks": "^5.1.0-rc-fb9a90fa48-20240614",
+    "globals": "^15.9.0",
+    "typescript-eslint": "^8.4.0"
   },
   "peerDependencies": {
     "eslint": "^9.8.0"
