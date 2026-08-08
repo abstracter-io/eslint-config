@@ -26,16 +26,25 @@ module.exports = [
 | `typescript` | yes      | yes       |
 | `react`      | yes      | **no**    |
 
+The `react` config needs two optional peer dependencies, installed by consumers
+that use it:
+
+> npm install --save-dev eslint-plugin-react eslint-plugin-react-hooks
+
+They are optional peers rather than dependencies because `eslint-plugin-react`
+caps its own `eslint` peer at `^9.7` — shipping it outright would make this
+package unresolvable for anyone on ESLint 10.
+
 `react` is stuck on ESLint 9. `eslint-plugin-react` has not shipped ESLint 10
 support — its peer range stops at `^9.7` and its rules still call the removed
 `context.getFilename()`.
 
-On ESLint 10 the `react` export drops the `eslint-plugin-react` and `react-hooks`
-blocks and reports one explanatory error per file instead, so you get an
-actionable message rather than
-`TypeError: contextOrFilename.getFilename is not a function`. The `base` and
-`typescript` rules it builds on still apply. Importing the package is always
-safe — only *using* `react` on ESLint 10 is degraded.
+On ESLint 10 — or when the two peers above are not installed — the `react` export
+drops the plugin blocks and reports one explanatory error per file instead, so you
+get an actionable message rather than
+`TypeError: contextOrFilename.getFilename is not a function` or a
+`MODULE_NOT_FOUND`. The `base` and `typescript` rules it builds on still apply.
+Importing the package is always safe — only *using* `react` is degraded.
 
 ### TypeScript 7
 
