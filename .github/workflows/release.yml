@@ -5,6 +5,9 @@ on:
     branches:
       - "**"
 
+  # release on demand, so that a green build is not the same thing as a release
+  workflow_dispatch:
+
 env:
   CI: true
   HUSKY: 0
