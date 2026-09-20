@@ -20,31 +20,49 @@ module.exports = [
 
 ## Compatibility
 
-| Export       | ESLint 9 | ESLint 10 |
-| ------------ | -------- | --------- |
-| `base`       | yes      | yes       |
-| `typescript` | yes      | yes       |
-| `react`      | yes      | **no**    |
+| Export       | Entry point                           | ESLint 9 | ESLint 10 |
+| ------------ | ------------------------------------- | -------- | --------- |
+| `base`       | `@abstracter/eslint-config`           | yes      | yes       |
+| `typescript` | `@abstracter/eslint-config`           | yes      | yes       |
+| `react`      | `@abstracter/eslint-config/react`     | **no**   | yes       |
 
-The `react` config needs two optional peer dependencies, installed by consumers
-that use it:
+### react
 
-> npm install --save-dev eslint-plugin-react eslint-plugin-react-hooks
+```js
+import { react } from '@abstracter/eslint-config/react';
 
-They are optional peers rather than dependencies because `eslint-plugin-react`
-caps its own `eslint` peer at `^9.7` — shipping it outright would make this
-package unresolvable for anyone on ESLint 10.
+export default [
+  ...react,
+];
+```
 
-`react` is stuck on ESLint 9. `eslint-plugin-react` has not shipped ESLint 10
-support — its peer range stops at `^9.7` and its rules still call the removed
-`context.getFilename()`.
+The `react` export lives at its own subpath and needs two optional peer
+dependencies, installed by consumers that use it:
 
-On ESLint 10 — or when the two peers above are not installed — the `react` export
-drops the plugin blocks and reports one explanatory error per file instead, so you
-get an actionable message rather than
-`TypeError: contextOrFilename.getFilename is not a function` or a
-`MODULE_NOT_FOUND`. The `base` and `typescript` rules it builds on still apply.
-Importing the package is always safe — only *using* `react` is degraded.
+> npm install --save-dev @eslint-react/eslint-plugin eslint-plugin-react-hooks
+
+React rules come from [@eslint-react](https://eslint-react.xyz)
+(`recommended-typescript`), not from `eslint-plugin-react`, which is stuck at
+7.37.5 (April 2025), caps its `eslint` peer at `^9.7` and still calls the removed
+`context.getFilename()` — see
+[jsx-eslint/eslint-plugin-react#3977](https://github.com/jsx-eslint/eslint-plugin-react/issues/3977).
+Rule names therefore changed wholesale: `react/no-danger` is now
+`@eslint-react/dom-no-dangerously-set-innerhtml`, and any `eslint-disable`
+comment naming a `react/*` rule needs rewriting. `react/prop-types` and
+`react/react-in-jsx-scope` have no replacement and no longer need disabling.
+
+Hook rules stay with `eslint-plugin-react-hooks`, maintained by the React team
+and backed by the React compiler. @eslint-react reimplements nine of those rules;
+they are turned off here so nothing is reported twice.
+
+@eslint-react documents ESLint **10.3.0** as its floor, which is why `react` is
+the one export that does not work on ESLint 9. `base` and `typescript` still do.
+
+The subpath exists because @eslint-react ships ESM only — its `exports` map
+declares an `import` condition and nothing else, so `require()` fails even under
+node's require(esm). Keeping it behind `/react` leaves `base` and `typescript`
+requireable CommonJS, and keeps ~150 transitive packages out of installs that
+never lint React.
 
 ### TypeScript 7
 
