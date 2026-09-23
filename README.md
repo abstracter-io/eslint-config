@@ -86,9 +86,8 @@ names:
 ```
 
 `tsc` then resolves to 7.x while `require('typescript')` resolves to 6.x with the
-classic API intact, which is what this config needs. digitalfleet's web-app runs
-this layout: typecheck, lint, build and test all pass, and `tsc` CPU time dropped
-from 4.85s to 1.85s.
+classic API intact, which is what this config needs, so a project can compile with
+the Go-native compiler and still lint.
 
 An earlier version of this section said not to do that, on the grounds that
 `@typescript/typescript6` depends on `@typescript/old` (itself `npm:typescript@^6`),
