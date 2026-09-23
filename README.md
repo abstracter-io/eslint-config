@@ -66,18 +66,41 @@ never lint React.
 
 ### TypeScript 7
 
-TypeScript 7 is **not supported**, and this is not a configuration problem you
-can work around here. The TS 7 npm package exports only `lib/version.cjs`, so
-`require('typescript')` no longer yields a compiler API. `typescript-eslint`
-throws on it by design, and other tooling that reads the API — `@swc-node/register`,
-for one — fails too. Stay on `typescript@^6` to lint.
+The `typescript` config cannot lint with TypeScript 7 installed as `typescript`.
+The TS 7 npm package exports only `lib/version.cjs`, so `require('typescript')`
+no longer yields a compiler API, and `typescript-eslint` throws on it by design -
+its peer range is still `>=4.8.4 <6.1.0`. TS 7.1 is expected to ship a stable
+API; track
+[typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940).
 
-Do **not** reach for the side-by-side alias trick
-(`typescript: "npm:@typescript/typescript6"` alongside TS 7 under another name).
-`@typescript/typescript6` depends on `@typescript/old`, which also declares a
-`tsc` binary, so two packages compete for `node_modules/.bin/tsc` and npm's link
-order decides the winner. It is not pinned by the lockfile: the same recipe
-resolved to TS 7 in one repo and TS 6 in another, meaning CI can silently build
-with a different compiler than your machine. Track
-[typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940)
-for real TS 7 support.
+You can still build with TS 7 today, by giving the compiler and the API separate
+names:
+
+```json
+{
+  "devDependencies": {
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
+  }
+}
+```
+
+`tsc` then resolves to 7.x while `require('typescript')` resolves to 6.x with the
+classic API intact, which is what this config needs. digitalfleet's web-app runs
+this layout: typecheck, lint, build and test all pass, and `tsc` CPU time dropped
+from 4.85s to 1.85s.
+
+An earlier version of this section said not to do that, on the grounds that
+`@typescript/typescript6` depends on `@typescript/old` (itself `npm:typescript@^6`),
+which also declares a `tsc` binary, so two packages would compete for
+`node_modules/.bin/tsc` with npm's link order deciding. That does not hold up:
+npm flattens the `@typescript/old` alias into plain `node_modules/typescript`, so
+`@typescript/native` ends up the only package contributing the bin, and the
+lockfile pins it. Re-verified across a clean `npm ci`.
+
+Note that `typescript` still resolves to 6.x for every API consumer in the
+workspace. That is the point of the layout, not a side effect - but it does mean
+a repo cannot claim to have "moved to TS 7" while this is in place. Other tooling
+that reads the compiler API is in the same position:
+[`@swc-node/register` crashes at require time](https://github.com/swc-project/swc-node/issues/1049)
+on TS 7, so repos using it need the alias too.
